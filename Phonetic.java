@@ -38,7 +38,12 @@ class Phonetic{
 			intNumQuestions = Integer.parseInt(inputNumQuestions);
 			points = printQuestions(intNumQuestions, index, alphabetArray,incorrectAnswers, ans, points);
 		} 
-		printResults(points, intNumQuestions,incorrectAnswers,ans);
+		//Print out number of points
+		System.out.println("\n");
+		System.out.println("You got "+points+"/"+intNumQuestions + ".");
+		if(points != intNumQuestions){
+			printResults(incorrectAnswers,ans);
+		}
 		System.out.println("\n");
 		System.out.println("Do you want to play again? (Y/N): ");
 		Scanner scannerCont = new Scanner(System.in);
@@ -61,23 +66,18 @@ class Phonetic{
 		return(points);
 	}
 
-	public static void printResults(int points, Integer intNumQuestions, String[] incorrectAnswers, String[] ans){
-		//Print out number of points
-		System.out.println("\n");
-		System.out.println("You got "+points+"/"+intNumQuestions + ".");
-		if(points != intNumQuestions){
-			//Print out incorrect answers
-			System.out.println("These are the ones you got wrong:");
-			Object[] headers={"Answer", "You Wrote"};
-			System.out.format("%-9s %-10s\n", headers);
-			System.out.println("------------------");
-			for(String wrong:incorrectAnswers){
-				if(wrong != null){
-					int find = Arrays.asList(incorrectAnswers).indexOf(wrong);
-					Object[] row = {ans[find],wrong};				
-					System.out.format("%-10s%-10s\n", row);
-				}	
-			}
+	public static void printResults(String[] incorrectAnswers, String[] ans){
+		//Print out incorrect answers
+		System.out.println("These are the ones you got wrong:");
+		Object[] headers={"Answer", "You Wrote"};
+		System.out.format("%-9s %-10s\n", headers);
+		System.out.println("------------------");
+		for(String wrong:incorrectAnswers){
+			if(wrong != null){
+				int find = Arrays.asList(incorrectAnswers).indexOf(wrong);
+				Object[] row = {ans[find],wrong};				
+				System.out.format("%-10s%-10s\n", row);
+			}	
 		}
 	}
 }
